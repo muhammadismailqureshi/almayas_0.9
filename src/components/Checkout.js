@@ -5,6 +5,20 @@ import axios from 'axios';
 
 const Checkout = ({ userId }) => {
 
+    const [paymentMethod, setPaymentMethod] = useState('COD');
+
+    //perform actions based on the selected payment method
+
+    if (paymentMethod === 'COD') {
+        //perform actions for COD
+    }
+    else if (paymentMethod === 'JazzCash') {
+        //perform actions for JazzCash
+    }
+    else if (paymentMethod === 'Easypaisa') {
+        //perform actions for Easypaisa
+    }
+
     const [cartItems, setCartItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
 
@@ -40,6 +54,14 @@ const Checkout = ({ userId }) => {
     return (
         <div>
             <h2>Checkout</h2>
+            <lable>
+                Payment Method:
+                <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+                    <option value="COD">Cash on Delivery</option>
+                    <option value="JazzCash">JazzCash</option>
+                    <option value="Easypaisa">Easypaisa</option>
+                </select>
+            </lable>
             <ul>
                 {cartItems.map((item) => (
                     <li key={item.product._id}>
@@ -54,4 +76,3 @@ const Checkout = ({ userId }) => {
 };
 
 export default Checkout;
-                    

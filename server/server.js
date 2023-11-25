@@ -54,9 +54,9 @@ app.get('/api/products', async (req, res) => {
 
 });
 
-// API endpoints to create a new order
+// API endpoints to create a new order/ checkout
 app.post('/api/orders', async (req, res) => {
-    const { userId, products, totalAmount } = req.body;
+    const { userId, products, totalAmount, paymentMethod } = req.body;
 
     try {
         const order = new Order({
@@ -67,6 +67,7 @@ app.post('/api/orders', async (req, res) => {
             })),
             totalAmount,
             status: 'pending',
+            paymentMethod, // COD, JazzCash, Easypaisa etc. payment method
         });
         await order.save();
         res.json(order);

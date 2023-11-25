@@ -12,6 +12,8 @@ const OrderSchema = new mongoose.Schema({
     ],
     totalAmount: { type: Number, required: true},
     status: { type: String, enum: ['pending', 'completed'], default: 'pending'},
+
+    paymentMethod: { type: String, enum: ['COD', 'JazzCash', 'Easypaisa'], required: true},
 });
 
 const Order = mongoose.model('Order', OrderSchema);
