@@ -2,11 +2,19 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../src/App.css'
 
 const Header = () => {
 
     return (
         <header>
+
+            <div className="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
             <div className="logo">
                 <Link to="/">Almayas</Link>
             </div>

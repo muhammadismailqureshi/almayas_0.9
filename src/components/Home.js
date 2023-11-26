@@ -1,6 +1,7 @@
 //src/components/Home.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from '../components/Header';
 
 const Home = () => {
     const [featuredProduct, setFeaturedProduct] = useState([]);
@@ -15,6 +16,7 @@ const Home = () => {
 
     return (
         <div>
+            <Header />
             <h2>Featured Product</h2>
                 <ul>
                     {featuredProduct.map((product) => (
