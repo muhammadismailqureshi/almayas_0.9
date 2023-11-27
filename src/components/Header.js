@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../src/App.css'
+import '../../src/App.css';
 
 
 const Header = () => {
