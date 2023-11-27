@@ -8,10 +8,17 @@ const ProductDetail = ({ match }) => {
 
     useEffect(() => {
         // Fetch the product details from the specified product ID
+        const productId = match.params.productId;
         axios.get(`/api/products/${productId}`)
             .then((response) => setProduct(response.data))
             .catch((error) => console.error('Error fetching product details:', error));
-    }, [productId]);
+    }, [match.params.productId]);
+
+    const addToCart = (productId) => {
+        axios.post(`/api/cart`, { productId })
+            .then((response) => console.log(response.data))
+            .catch((error) => console.error('Error adding to cart:', error));
+    };
 
     if (!product) {
         return <div>Loading...</div>;
