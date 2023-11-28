@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../../src/App.css';
 
 const Checkout = ({ userId, amount, orderId, description }) => {
   const [paymentMethod, setPaymentMethod] = useState('COD');
@@ -24,9 +25,9 @@ const Checkout = ({ userId, amount, orderId, description }) => {
       } else if (paymentMethod === 'JazzCash') {
         // Handle the payment for JazzCash
         const response = await axios.post('/api/jazzcash/initiate-payment', {
-          amount,
-          orderId,
-          description,
+          amount: totalAmount,
+          orderId: generateOrderId(), // Generate a unique order ID
+          description: 'Payment for your order',
         });
 
         const { paymentUrl } = response.data;
@@ -57,29 +58,69 @@ const Checkout = ({ userId, amount, orderId, description }) => {
       .catch((error) => console.error('Error placing order:', error));
   };
 
+  const generateOrderId = () => {
+    // Generate a random order ID
+    return 'ORD-' + Math.floor(Math.random() * 1000000);
+  };
+
   return (
-    <div>
-      <h2>Checkout</h2>
-      <label>
-        Payment Method:
-        <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-          <option value="COD">Cash on Delivery</option>
-          <option value="JazzCash">JazzCash</option>
-          <option value="Easypaisa">Easypaisa</option>
-        </select>
-      </label>
-      <button onClick={handlePayment}>Proceed to Payment</button>
-      <ul>
-        {cartItems.map((item) => (
-          <li key={item.product._id}>
-            {item.product.name} - Quantity: {item.quantity} - Subtotal: ${item.subtotal}
-          </li>
-        ))}
-      </ul>
-      <p>Total Amount: ${totalAmount}</p>
-      <button onClick={placeOrder}>Place Order</button>
+    <div className="checkout-container">
+      <div className="checkout-summary">
+        <h2>Order Summary</h2>
+        <ul>
+          {cartItems.map((item) => (
+            <li key={item.product._id}>
+              <div className="checkout-item">
+                <img
+                  src={item.product.imageUrl}
+                  alt={item.product.name}
+                  className="checkout-item-image"
+                />
+                <div className="checkout-item-details">
+                  <p>{item.product.name}</p>
+                  <p>Quantity: {item.quantity}</p>
+                  <p>Subtotal: ${item.subtotal}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p>Total Amount: PKR.{totalAmount}</p>
+      </div>
+      <div className="checkout-payment">
+        <h2> Payment Information</h2>
+        <label>
+          Payment Method:
+          <select
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          >
+            <option value="COD">Cash on Delivery</option>
+            <option value="JazzCash">JazzCash</option>
+            <option value="Easypaisa">Easypaisa</option>
+          </select>
+        </label>
+        <button onClick={handlePayment}>Proceed to Payment</button>
+      </div>
+      <div className="checkout-shipping">
+        <h2> Shipping Information</h2>
+        <label>
+          Address:
+          <input type="text" />
+        </label>
+        <label>
+          City:
+          <input type="text" />
+        </label>
+        <label>
+          Phone Number:
+          <input type="text" />
+        </label>
+      </div>
+
+
+      <button className="place-order-button" onClick={placeOrder}>Place Order</button>
     </div>
   );
 };
-
 export default Checkout;

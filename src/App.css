@@ -131,6 +131,55 @@ button:hover {
 }
   
 
+<!--Checkout_CSS-->
+
+.checkout-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.checkout-summary,
+.checkout-payment,
+.checkout-shipping {
+  flex: 1;
+  max-width: 400px;
+}
+
+.checkout-item {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.checkout-item-image {
+  max-width: 60px;
+  margin-right: 16px;
+}
+
+.checkout-item-details {
+  flex-grow: 1;
+}
+
+.place-order-button {
+  background-color: #e44d26;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  max-width: 425px;
+}
+
+.place-order-button:hover {
+  background-color: #c53921;
+}
+  
+
+
+
+
 
   
 
