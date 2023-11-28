@@ -1,14 +1,18 @@
 // src/components/Login.js
 
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import '../../src/App.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const history = useHistory();
 
-    const simulateLogin = () => {
+
+    /*const simulateLogin = () => {
         // Simulate login request
         if (username === 'user' && password === 'password') {
             setErrorMessage('');
@@ -16,15 +20,32 @@ const Login = () => {
         } else {
             setErrorMessage('Invalid username or password ! Please try again');
         }
-    };
+    };*/
 
-        
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post('/api/auth/login', {
+                username,
+                password
+            });
+
+            console.log(response.data); // you might want to  handle the response according to your needs
+
+            // Assuming successfull login, redirect the user to the home page
+            history.push('/');
+
+        } catch (error) {
+            console.error('Error logging in', error);
+            setErrorMessage('Invalid username or password ! Please try again');
+        }
+    };        
 
 
     const handleSubmmit = (e) => {
         e.preventDefault();
         // Add your logic here to handle login
-        simulateLogin();
+        //simulateLogin();
+        handleLogin();
     };
 
     return (

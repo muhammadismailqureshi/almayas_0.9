@@ -8,6 +8,7 @@ const Product = require('./models/Product');
 const User = require('./models/User');
 const Cart = require('./models/Cart');
 const Order = require('./models/Order');
+const authRoutes = require('./routes/auth');
                                 //const {MongoClient, ServerApiVersion} = require('mongodb');
                                 //const uri = "mongodb+srv://almayasDB:5Qdg9ucwYhAK5qBG@cluster0.yuybgfn.mongodb.net/?retryWrites=true&w=majority";
 
@@ -197,6 +198,9 @@ process.on('SIGINT', () => {
         process.exit(0);
     });
 });
+
+//Use the auth routes
+app.use('/api/auth', authRoutes);
 
 // Add your API routes here
 app.listen(PORT, () => {
