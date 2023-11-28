@@ -6,7 +6,7 @@ import '../../src/App.css';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessgae, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const simulateLogin = () => {
         // Simulate login request
@@ -16,7 +16,7 @@ const Login = () => {
         } else {
             setErrorMessage('Invalid username or password ! Please try again');
         }
-    }
+    };
 
         
 
@@ -53,7 +53,7 @@ const Login = () => {
                 />
                 <button type="submit">Login</button>
 
-                {errorMessgae && <p className="error-message">{errorMessgae}</p>}
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
             </form>
         </div>
     );
