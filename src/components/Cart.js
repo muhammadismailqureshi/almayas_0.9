@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../../src/App.css';
 
 const Cart = ({userId}) => {
     const [cartItems, setCartItems] = useState([]);
@@ -20,16 +21,17 @@ const Cart = ({userId}) => {
     }, [userId]);
 
     return (
-        <div>
+        <div className="cart-container">
             <h2>Shopping Cart</h2>
             <ul>
                 {cartItems.map((item) => (
-                    <li key={item._id}>
-                        {item.product.name} - Quantity: {item.quantity} - Subtotal: ${item.subtotal}
+                    <li key={item.product._id}>
+                        {item.product.name} - Quantity: {item.quantity} - Subtotal: PKR.{item.subtotal}
                     </li>
                 ))}
             </ul>
-            <p>Total Amount: ${totalAmount}</p>
+            <p>Total Amount: PKR.{totalAmount}</p>
+            
         </div>
     );
 };
