@@ -15,27 +15,68 @@ const Cart = ({userId}) => {
             .then((response) => {
                 setCartItems(response.data.items);
                 setTotalAmount(response.data.totalAmount);
-            }
-            )
+            })
             .catch((error) => console.error('Error fetching cart items:', error));
     }, [userId]);
 
+    const updateQuantity = (productId, newQuantity) => {
+        // Update the quantity of the specified product in the cart
+        const updatedCart = cartItems.map((item) => 
+            item.product._id === productId ? { ...item, quantity: newQuantity } : item
+        );
+        setCartItems(updatedCart);
+    };
+
+    const removeItem = (productId) => {
+        // Remove the specified product from the cart
+        const updatedCart = cartItems.filter((item) => item.product._id !== productId);
+        setCartItems(updatedCart);
+    };
+
+    const handleCheckout = () => {
+        // Checkout - send a POST request to the server to create an order
+        alert('Proceeding to checkout');
+    };
+
+
+
+
     return (
         <div className="cart-container">
-            <h2>Shopping Cart</h2>
+            <h2>Your Cart</h2>
             <ul>
                 {cartItems.map((item) => (
                     <li key={item.product._id}>
-                        {item.product.name} - Quantity: {item.quantity} - Subtotal: PKR.{item.subtotal}
+                        <div className="cart-item">
+                            <img
+                                src={item.product.imageUrl}
+                                alt={item.product.name}
+                                className="cart-item-image"
+                            />
+                            <div className="cart-item-details">
+                                <p>{item.product.name}</p>
+                                <p>Price: PKR.{item.product.price}</p>
+                                <p>
+                                    Quantity:
+                                    <input
+                                        type="number"
+                                        value={item.quantity}
+                                        onChange={(e) => updateQuantity(item.product._id, e.target.value)}
+                                        min="1"
+                                    />
+                                </p>
+                                <button onClick={() => removeItem(item.product._id)}>Remove</button>
+                            </div>
+                        </div>
                     </li>
                 ))}
             </ul>
-            <p>Total Amount: PKR.{totalAmount}</p>
-            
+            <div className="cart-summary">
+                <p> Total Amount: PKR.{totalAmount}</p>
+                <button onClick={handleCheckout}>Proceed to Checkout</button>
+            </div>
         </div>
     );
 };
 
-export default Cart;
-
-            
+export default Cart;            
