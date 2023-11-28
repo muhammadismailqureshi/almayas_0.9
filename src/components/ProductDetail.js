@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../../src/App.css';
+
+
 
 const ProductDetail = ({ match }) => {
     const [product, setProduct] = useState(null);
@@ -25,20 +28,28 @@ const ProductDetail = ({ match }) => {
     }
 
     return (
-        <div>
-            <h2>{product.name}</h2>
-            <p>Price: ${product.price}</p>
-            <p>Description: {product.description}</p>
-            <button onClick = {()=> addToCart(product._id)}>Add to Cart</button>
-        </div>
-    );
-};
-
+        <div className="product-detail-container">
+            <div className="product-image">
+                {/* Display the product image here*/}
+                <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="product-main-image"
+                />
+                {/* Display the product thumbnails here*/}
+                </div>
+                <div className="product-details">
+                    <h2>{product.name}</h2>
+                    <p>Price: PKR.{product.price}</p>
+                    <p>Description: {product.description}</p>
+                    <button onClick={() => addToCart(product._id)}> Add to Cart</button>
+                </div>
+                <div className="product-reviews">
+                    {/* Display the product reviews here*/}
+                    <h3>Cutomer Reviews</h3>
+                    {/* List of reviews with user comments and ratings */}
+                </div>
+            </div>
+        );
+    }
 export default ProductDetail;
-
-
-            
-        
-
-
-    
