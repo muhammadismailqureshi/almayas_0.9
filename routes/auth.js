@@ -1,12 +1,24 @@
 // routes/auth.js
 const express = require('express');
 const bcrypt = require('bcrypt');
+const {check, validationResult} = require('express-validator');
 const User = require('../models/User');
 const router = express.Router();
 
+const validateRegistration = [
+    check('username').length({min: 3}).withMessage('Username must be at least 3 characters long.'),
+    check('email').isEmail().withMessage('Please provide a valid email address.'),
+    check('password').isLength({min: 6}).withMessage('Password must be at least 6 characters long.'),
+];
+
 // POST /auth/register
 
-router.post('/register', async (req, res) => {
+router.post('/register', validateRegistration,  async (req, res) => {
+    // Check for validation error
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
     try {
         const { username, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
