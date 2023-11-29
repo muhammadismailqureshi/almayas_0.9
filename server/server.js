@@ -9,6 +9,8 @@ const User = require('./models/User');
 const Cart = require('./models/Cart');
 const Order = require('./models/Order');
 const authRoutes = require('./routes/auth');
+const passwordResetRoutes = require('./routes/passwordReset');
+const app = express();
                                 //const {MongoClient, ServerApiVersion} = require('mongodb');
                                 //const uri = "mongodb+srv://almayasDB:5Qdg9ucwYhAK5qBG@cluster0.yuybgfn.mongodb.net/?retryWrites=true&w=majority";
 
@@ -36,7 +38,14 @@ const authRoutes = require('./routes/auth');
 
 
 
-const app = express();
+
+
+// Use the password reset route
+
+app.use('/api/password-reset', passwordResetRoutes);
+
+
+
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
