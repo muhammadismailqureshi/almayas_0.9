@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../src/App.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
 
     /*const simulateLogin = () => {
@@ -32,7 +32,7 @@ const Login = () => {
             console.log(response.data); // you might want to  handle the response according to your needs
 
             // Assuming successfull login, redirect the user to the home page
-            history.push('/');
+            navigate('/home');
 
         } catch (error) {
             console.error('Error logging in', error);
@@ -79,6 +79,4 @@ const Login = () => {
         </div>
     );
 };
-
 export default Login;
-
