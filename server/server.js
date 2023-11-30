@@ -10,6 +10,8 @@ const Cart = require('./models/Cart');
 const Order = require('./models/Order');
 const authRoutes = require('./routes/auth');
 const passwordResetRoutes = require('./routes/passwordReset');
+const forgotPasswordRoutes = require('./routes/forgotPassword');
+const rateLimit = require('express-rate-limit');
 const app = express();
                                 //const {MongoClient, ServerApiVersion} = require('mongodb');
                                 //const uri = "mongodb+srv://almayasDB:5Qdg9ucwYhAK5qBG@cluster0.yuybgfn.mongodb.net/?retryWrites=true&w=majority";
@@ -39,10 +41,24 @@ const app = express();
 
 
 
+const forgotPasswordLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // 5 requests,
+    message: 'Too many password reset attempts. Please try again later.',
+});
+
 
 // Use the password reset route
 
+app.use(express.json());
+
+app.use('/forgot-password/request', forgotPasswordLimiter);
+
+app.use('/forgot-password', forgotPasswordRoutes);
+
 app.use('/api/password-reset', passwordResetRoutes);
+
+
 
 
 

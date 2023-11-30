@@ -10,6 +10,9 @@ import Checkout from './components/Checkout';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import PasswordReset from './components/PasswordReset';
+import PasswordResetVerification from './components/PasswordResetVerification';
+import ForgotPassword from './components/ForgotPassword';
 import './App.css';
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/password-reset" element={<PasswordReset />} />
+        <Route path="/password-reset/verify/:token" element={<PasswordResetVerification />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>        
   );

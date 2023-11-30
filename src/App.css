@@ -292,6 +292,114 @@ button:hover {
 
 
 
+<!--PasswordReset_CSS-->
+
+.password-reset-container,
+.password-reset-verification-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 400px;
+  margin: 0 auto;
+  
+}
+
+.reset-message {
+  color: #333;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Forgot_Password_CSS-->
+
+.forgot-password-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 400px;
+  margin: 0 auto;
+  
+}
+
+.forgot-password-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.forgot-password-container form {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.forgot-password-container label {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+.forgot-password-container input {
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  
+}
+
+.forgot-password-container button {
+  background-color: #e44d26;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+}
+
+
+.forgot-password-container button:hover {
+  background-color: #c53921;
+}
+
+
+.reset-message {
+  color: #333;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
