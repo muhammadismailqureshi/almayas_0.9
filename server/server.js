@@ -12,6 +12,7 @@ const authRoutes = require('./routes/auth');
 const passwordResetRoutes = require('./routes/passwordReset');
 const forgotPasswordRoutes = require('./routes/forgotPassword');
 const rateLimit = require('express-rate-limit');
+const productRoutes = require('./routes/products');
 const app = express();
                                 //const {MongoClient, ServerApiVersion} = require('mongodb');
                                 //const uri = "mongodb+srv://almayasDB:5Qdg9ucwYhAK5qBG@cluster0.yuybgfn.mongodb.net/?retryWrites=true&w=majority";
@@ -48,9 +49,36 @@ const forgotPasswordLimiter = rateLimit({
 });
 
 
+
+
+
 // Use the password reset route
 
 app.use(express.json());
+
+
+// Connect to MongoDB
+mongoose.connect('mongodb+srv://almayasDB:5Qdg9ucwYhAK5qBG@cluster0.yuybgfn.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose is connected!!!!');
+});
+mongoose.connection.on('error', (err) => {
+    console.error('Error connecting to mongoose', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('Disconnected from MongoDB');
+});
+
+process.on('SIGINT', () => {
+    mongoose.connection.close(() => {
+        console.log('Mongoose connection closed due to app termination');
+        process.exit(0);
+    });
+});
 
 app.use('/forgot-password/request', forgotPasswordLimiter);
 
@@ -58,6 +86,10 @@ app.use('/forgot-password', forgotPasswordRoutes);
 
 app.use('/api/password-reset', passwordResetRoutes);
 
+
+
+// Use the product routes
+app.use('/api/products', productRoutes);
 
 
 
@@ -201,28 +233,6 @@ app.post('/api/users', async (req, res) => {
             
 
 
-// Connect to MongoDB
-mongoose.connect('mongodb+srv://almayasDB:5Qdg9ucwYhAK5qBG@cluster0.yuybgfn.mongodb.net/?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-mongoose.connection.on('connected', () => {
-    console.log('Mongoose is connected!!!!');
-});
-mongoose.connection.on('error', (err) => {
-    console.error('Error connecting to mongoose', err);
-});
-
-mongoose.connection.on('disconnected', () => {
-    console.log('Disconnected from MongoDB');
-});
-
-process.on('SIGINT', () => {
-    mongoose.connection.close(() => {
-        console.log('Mongoose connection closed due to app termination');
-        process.exit(0);
-    });
-});
 
 //Use the auth routes
 app.use('/api/auth', authRoutes);

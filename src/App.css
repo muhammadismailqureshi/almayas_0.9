@@ -1,3 +1,11 @@
+/* Responsive designs */
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
+
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -73,12 +81,13 @@ input {
 button {
   background-color: #e44d26;
   color: #fff;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px; /* Provide space between input and button */
   width: 107%;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
